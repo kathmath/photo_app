@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import "http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css";
+
+
+$margin: 1em;
+$color1: #FFF; //white
+$color2: #EEE; //lt grey
+
+@mixin flex_container($flex-direction, $align-items, $justify-content, $wrap) {
+	display: flex;
+	flex-direction: $flex-direction;
+	align-items: $align-items;
+	justify-content: $justify-content;
+	flex-wrap: $wrap;
+}
+
+h1 {
+	font-family: ('Open Sans', 'Arial', sans-serif);
+	font-size: 20px;
+	text-align: center;
+	padding: 20px;
+}
+
+.container {
+	@include flex_container(row, center, space-between, wrap);
+	max-width: 60em;
+	margin: 0 auto;
+}
+
+.photo {
+	height: 200px;
+	margin: 10px;
+}
+
+.photo_title {
+	font-family: ('Open Sans', 'Arial', sans-serif);
+	color: black;
+}
+
+.photo_container {
+	@include flex_container(column, center, space-between, wrap);
+	max-width: 60em;
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
