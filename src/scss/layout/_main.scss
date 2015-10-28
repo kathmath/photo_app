@@ -1,10 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import "http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css";
-
 
 $margin: 1em;
+$padding: 1em;
 $color1: #FFF; //white
-$color2: #EEE; //lt grey
+
 
 @mixin flex_container($flex-direction, $align-items, $justify-content, $wrap) {
 	display: flex;
@@ -14,28 +13,57 @@ $color2: #EEE; //lt grey
 	flex-wrap: $wrap;
 }
 
+
+//main styles
+body {
+	color: $color1;
+	font-family: ('Open Sans', 'Arial', sans-serif);
+	padding: $padding;
+}
+
 h1 {
 	font-family: ('Open Sans', 'Arial', sans-serif);
 	font-size: 20px;
 	text-align: center;
-	padding: 20px;
+	padding: $padding;
+}
+
+
+.photoContainer {
+	@include flex_container(column, center, center, nowrap);
+	background: rgba(30, 30, 30, 0.6);
+	z-index: 999;
+	position: absolute; 
+	top: 0; 
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#photoTitle {
+		padding: $padding;
+	}
+
+#row {
+	@include flex_container(row, center, space-between, nowrap);
+	padding-top: $padding * 2;
+}
+
+#photoWrap {
+	padding: $padding / 2;
+	padding-bottom: 3px;
+	background: $color1;
+	box-shadow: 0 0 20px #222;
 }
 
 #previous, #next {
-	color: white;
 	font-size: 30px;
-	// height: 300px;
-	// width: 200px;
-	// text-align: center;
-	// margin-top: 25%;
-	margin: 50px;
-	padding: 50px;
+	margin: $padding * 2;
 }
 
 #previous::after{
   height: 100%;
   width: 50%;
-  // padding: 200px 400px;
   content: '';
   position: absolute;
   top: 0;
@@ -45,7 +73,6 @@ h1 {
 #next::after{
   height: 100%;
   width: 50%;
-  // padding: 200px 400px;
   content: '';
   position: absolute;
   z-index: 0;
@@ -53,55 +80,30 @@ h1 {
   right: 0;
 }
 
-.container {
-	@include flex_container(row, center, center, wrap);
-	max-width: 60em;
-	margin: 0 auto;
-}
 
-// #close {
-// 	font-family: ('Open Sans', 'Arial', sans-serif);
-// 	color: white;
-// 	font-size: 40px;
-// 	position: absolute;
-// 	top: 70px;
-// 	right: 300px;
-// 	z-index: 999;
-// }
-
-#row {
-	@include flex_container(row, center, space-between, nowrap);
-	max-width: 70em;
-	margin: $margin;
-}
-
-// .photo {
-// 	height: 200px;
-// 	margin: 10px;
-// }
-
-.photo_container {
-	@include flex_container(column, center, center, nowrap);
-	// position: fixed;
-	// top: 0;
-	// left: 0;
-	// height: 100%;
-	// width: 100%;
-	height: 700px;
-	background: rgba(30, 30, 30, 0.9);
-	z-index: 998;
-	
+//media queries
+@media (max-width: 750px) {
 	#photo {
-		max-height: 500px;
+		max-width: 400px;
 	}
 
-	#photo_title {
-		font-family: ('Open Sans', 'Arial', sans-serif);
-		display: inline-block;
-		color: white;
-		text-align: center;
+	#previous, #next {
+		margin: $margin;
 	}
 }
+
+@media (max-width: 550px) {
+	#photo {
+		max-width: 250px;
+	}
+
+	#previous, #next {
+		margin: $margin * 0.5;
+	}
+}
+
+
+
 
 
 

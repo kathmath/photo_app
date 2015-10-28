@@ -5,8 +5,6 @@ var url = 'https://api.flickr.com/services/rest/?method=flickr.people.getPublicP
 //twitter image url : https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 
 
-
-
 //get data from flickr 
 function getJSON(method, url) {
 
@@ -66,20 +64,20 @@ var getFromLocalStorage = function() {
   return photoArr;
 }
 
-
+//HTML
 var buildHTML = function(photoTitle, imageUrl) {
 
   //create 
   var container = document.getElementById("album");
-  var photo_container = document.createElement("div");
+  var photoContainer = document.createElement("div");
 
   //modify
-  photo_container.classList.add("photo_container");
-  photo_container.innerHTML = "<div id= 'row'><div id= 'previous'><i id = 'left' class='fa fa-chevron-left'></i></div><img id= 'photo' src=" + imageUrl + "><div id= 'next'><i id = 'right' class='fa fa-chevron-right'></i></div></div><p id= 'photo_title'>" + photoTitle + "</p>";
-  photo_container.id = "lightbox";
+  photoContainer.classList.add("photoContainer");
+  photoContainer.innerHTML = "<div id= 'row'><div id= 'previous'><i id = 'left' class='fa fa-chevron-left'></i></div><div id= 'photoWrap'><img id= 'photo' src=" + imageUrl + "></div><div id= 'next'><i id = 'right' class='fa fa-chevron-right'></i></div></div><p id= 'photoTitle'>" + photoTitle + "</p>";
+  photoContainer.id = "lightbox";
 
   // append
-  container.appendChild(photo_container);  
+  container.appendChild(photoContainer);  
 
   //add event listeners
   addEvents();
@@ -93,11 +91,6 @@ var initialHTML = function(photoArr) {
 
   buildHTML(photoTitle, imageUrl);
 
-  //remove previous button
-  // var prevButton = document.getElementById("previous");
-  // var arrow = document.getElementById("left");
-  // prevButton.removeChild(arrow);
-
   localStorage.setItem("count", 0);
 }
 
@@ -106,33 +99,18 @@ var newHTML = function(i) {
   
   //make new
   var obj = getFromLocalStorage()[i];
-
-  // var photoId = obj.id;
   var photoTitle = obj.photoTitle;
   var imageUrl = obj.imageUrl;
 
 
   //reset photo and title
   document.getElementById("photo").src = imageUrl;
-  document.getElementById("photo_title").innerText = photoTitle;
-
-
-  //remove arrows at beginning and end
-  // if(i = 0) {
-  //   var prevButton = document.getElementById("previous");
-  //   var arrow = document.getElementById("left");
-  //   prevButton.removeChild(arrow);
-  // } 
-  // // else if(i = (getFromLocalStorage().length) - 1) {
-  // //   var nextButton = document.getElementById("next");
-  // //   var arrow = document.getElementById("right");
-  // //   nextButton.removeChild(arrow);
-  // // }
-  // console.log(i);
-  // console.log(getFromLocalStorage().length)
+  document.getElementById("photoTitle").innerText = photoTitle;
 
 }
 
+
+//UI CONTROLS
 var previous = function() {
   var count = parseInt(localStorage.getItem("count"));
   if(count > 0) {  
@@ -184,53 +162,6 @@ function checkKey(key) {
 getJSON("GET", url).then(function(response) {
   return response.photos.photo;
 }, function(error) {
-  console.error("Something went wrong!", error);
+  console;
 }).then(albumArr).then(getFromLocalStorage).then(initialHTML);
-
-
-
-
-//display all images 
-// var displayAll = function(photoArr) {
-
-//   for(var i = 0; i < photoArr.length; i++) {
-//     //get JSON values
-//     var farmId = photoArr[i].farm;
-//     var serverId = photoArr[i].server;
-//     var photoId = photoArr[i].id;
-//     var secret = photoArr[i].secret;
-//     var photoTitle = photoArr[i].title;
-
-//     //build photo url
-//     var imageUrl = "https://farm" + farmId + ".staticflickr.com/" + serverId +"/" + photoId + "_" + secret + ".jpg";
-
-//     //build HTML
-//     var container = document.getElementById("album");
-//     var photo_container = document.createElement("div");
-
-//     // var photo = document.createElement("image");
-
-//     photo_container.classList.add("thumbnail");
-//     photo_container.setAttribute("id", i);
-//     // photo.classList.setAttribute("id", imageUrl);
-
-//     photo_container.innerHTML = "<img class= 'photo' src=" + imageUrl + "><p class= 'photo_title'>" + photoTitle + "</p>";
-    
-//     // photo_container.appendChild(photo);
-//     container.appendChild(photo_container);
-
-//   }
-  
-// }
-
-
-
-
-
-
-
-
-
-
-
 
