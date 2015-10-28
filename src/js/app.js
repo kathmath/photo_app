@@ -30,6 +30,22 @@ function getJSON(method, url) {
   });
 }
 
+//If IE 
+function getJSONIE() {
+
+  var xhr = new XMLHttpRequest;
+  xhr.open('GET', 'https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=e45668aaa6d50226c2df38b2f2d75c86&user_id=84003820@N05&format=json&nojsoncallback=1', false);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+        initialHTML(getFromLocalStorage(albumArr(JSON.parse(xhr.responseText).photos.photo)));
+    } else {
+        console.log('Request failed.  Returned status of ' + xhr.status);
+    }
+  };
+  xhr.send();
+}
+
+
 //build array of objects containing title & url, put in local storage
 var albumArr = function(photoArr) {
   var photos = [];
@@ -159,9 +175,25 @@ function checkKey(key) {
 
 
 //putting everything together
-getJSON("GET", url).then(function(response) {
-  return response.photos.photo;
-}, function(error) {
-  console;
-}).then(albumArr).then(getFromLocalStorage).then(initialHTML);
+function showPhotos() {
+  if(typeof Promise !== "undefined") {
+    getJSON("GET", url).then(function(response) {
+    return response.photos.photo;
+    }, function(error) {
+      console;
+    }).then(albumArr).then(getFromLocalStorage).then(initialHTML);
+  } else {
+    getJSONIE();
+  }
+}  
+
+showPhotos();
+
+
+  
+
+
+
+
+
 
