@@ -102,6 +102,12 @@ h1 {
 	}
 }
 
+@media (max-height: 670px) and (orientation: landscape) {
+	#photo {
+		max-height: 200px;
+	}
+}
+
 
 
 
