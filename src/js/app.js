@@ -2,7 +2,7 @@
 
 var url = 'https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&api_key=e45668aaa6d50226c2df38b2f2d75c86&user_id=84003820@N05&format=json&nojsoncallback=1';
 
-//twitter image url : https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+//flickr image url : https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 
 
 //get data from flickr 
@@ -69,7 +69,7 @@ var albumArr = function(photoArr) {
     photos.push(photoVals);
   }
 
-  // console.log(photos);
+  console.log(photos);
   localStorage.setItem('images', JSON.stringify(photos));
 }
 
@@ -115,13 +115,15 @@ var newHTML = function(i) {
   
   //make new
   var obj = getFromLocalStorage()[i];
+  console.log(obj);
   var photoTitle = obj.photoTitle;
+  console.log(photoTitle);
   var imageUrl = obj.imageUrl;
 
 
   //reset photo and title
   document.getElementById("photo").src = imageUrl;
-  document.getElementById("photoTitle").innerText = photoTitle;
+  document.getElementById("photoTitle").innerHTML = photoTitle;
 
 }
 
